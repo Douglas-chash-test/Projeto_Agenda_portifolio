@@ -1,0 +1,87 @@
+/* Configurações Gerais */
+body {
+    background-color: #1C1C1C; /* Background full page */
+    color: #ffffff;             /* Full text */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+}
+
+/* Container do Formulário */
+.container {
+    background-color: #262626; 
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+}
+
+h2 {
+    margin-bottom: 30px;
+    font-weight: 300;
+}
+
+/* Campos de Entrada */
+.input-group {
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 14px;
+}
+
+input {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    background-color: #4F4F4F; /* Background inputs */
+    color: #ffffff;
+    border-radius: 8px;         /* Levemente arredondado */
+    box-sizing: border-box;
+    outline: none;
+}
+
+input::placeholder {
+    color: #bbbbbb;
+}
+
+/* Botões */
+.button-group {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 25px;
+}
+
+button {
+    padding: 12px;
+    border: none;
+    border-radius: 8px;         /* Levemente arredondado */
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 16px;
+    transition: opacity 0.2s;
+    width: 100%;
+}
+
+button:hover {
+    opacity: 0.9;
+}
+
+.btn-cadastro {
+    background-color: #FFD700; /* Button cadastro */
+    color: #1C1C1C;             /* Texto escuro para contraste */
+}
+
+.btn-login {
+    background-color: #4F4F4F; /* Button login (estilo secundário) */
+    color: #ffffff;
+}
