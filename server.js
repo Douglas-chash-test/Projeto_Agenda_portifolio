@@ -6,8 +6,15 @@ const mongoose = require('mongoose');
 const session = require('express-session');
 const flash = require('connect-flash');
 const { middlewareGlobal } = require('./src/middlewares/middleware');
+const dotenv = require('dotenv');
 
-
+dotenv.config();
+mongoose.connect(process.env.CONNECTMONGO, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+})
+.then(() => console.log('Mongo conectado'))
+.catch(err => console.log(err));
 app.use(express.urlencoded({ extended: true }));
 
 app.set('views', path.join(__dirname, 'src', 'views'));

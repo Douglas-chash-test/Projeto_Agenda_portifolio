@@ -7,6 +7,8 @@ const cadastroUser = new moongose.Schema({
     senha: {type: String, required: true},
 })
 
+const LoginModel = moongose.model('Login', cadastroUser);
+
 class cadastroUserBD{
     constructor(body){
         this.body = body;
