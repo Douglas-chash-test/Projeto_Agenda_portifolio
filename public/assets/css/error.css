@@ -1,0 +1,29 @@
+/* Estilização do Bloco de Erro */
+.error-box {
+    background-color: rgba(255, 68, 68, 0.1); /* Vermelho bem suave de fundo */
+    border: 1px solid #c57979;                /* Borda vermelha sólida */
+    border-radius: 8px;                       /* Seguindo o padrão arredondado */
+    padding: 15px;
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.error-header {
+    color: #ff4444;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+    font-size: 14px;
+}
+
+.error-list {
+    margin: 0;
+    padding-left: 25px;
+    color: #ffcccc; /* Um tom de rosa claro para o texto não ficar tão agressivo */
+    font-size: 13px;
+}
+
+.error-list li {
+    margin-bottom: 5px;
+}

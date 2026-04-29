@@ -9,32 +9,34 @@
 <body>
 
     <div class="container">
+      <form action="cadastro/registro" method="POST">
         <h2>Criar Conta</h2>
-        
+        <%- include('error') -%>
         <div class="input-group">
             <label>E-mail</label>
-            <input type="email" placeholder="seu@email.com">
+            <input type="email" name="email" placeholder="seu@email.com">
         </div>
 
         <div class="input-group">
             <label>Usuário</label>
-            <input type="text" placeholder="Escolha um nome de usuário">
+            <input type="text" name="username" placeholder="Escolha um nome de usuário">
         </div>
 
         <div class="input-group">
             <label>Senha</label>
-            <input type="password" placeholder="Digite sua senha">
+            <input type="password" name="senha" placeholder="Digite sua senha">
         </div>
 
         <div class="input-group">
             <label>Confirme a Senha</label>
-            <input type="password" placeholder="Repita a senha">
+            <input type="password" name="confirmar_senha" placeholder="Repita a senha">
         </div>
 
         <div class="button-group">
             <button class="btn-cadastro">Cadastrar</button>
-            <button class="btn-login" onclick="window.location.href='login'">Voltar ao Login</button>
+            <button class="btn-login" type="button" onclick="window.location.href='/login'">Voltar ao Login</button>
         </div>
+        </form>
     </div>
 
 </body>

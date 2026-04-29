@@ -1,0 +1,11 @@
+<link rel="stylesheet" href="/assets/css/error.css">
+<%if (errors.length > 0) { %> 
+<div class="error-box">
+    <div class="error-header">
+        <% errors.forEach(error => { %>
+            <%= error %><br>
+        <% }); %>
+    </div>
+    
+</div>
+<% }%>
