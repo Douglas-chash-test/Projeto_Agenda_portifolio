@@ -12,13 +12,13 @@ exports.esqueceuSenha = (req , res) => {
     res.render('esqueceu_senha');
 }
 
-exports.registro = (req , res) => {
+exports.registro = async (req , res) => {
     const user = new cadastroUserBD(req.body);
-    user.RegistraUser();
+    await user.RegistraUser();
     if(user.errors.length > 0){
         req.flash('errors', user.errors);
         req.session.save(() => res.redirect('back'));
         return;
     }
-    res.send(user.errors);
+    res.redirect('/login');
 }

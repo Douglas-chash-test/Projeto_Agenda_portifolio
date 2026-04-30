@@ -1,5 +1,6 @@
 const moongose = require('mongoose');
 const validator = require('validator');
+const bcryptjs = require('bcryptjs');
 
 const cadastroUser = new moongose.Schema({
     username: {type: String, required: true},
@@ -13,12 +14,19 @@ class cadastroUserBD{
     constructor(body){
         this.body = body;
         this.errors = [];
-
+        this.user = null;
     }
 
-    RegistraUser(){ 
+    async RegistraUser(){ 
         this.valida()
         if(this.errors.length > 0 ) return;
+        try{
+          const salt = bcryptjs.genSaltSync();  
+          this.body.senha = bcryptjs.hashSync(this.body.senha, salt);
+          this.user = await LoginModel.create(this.body);
+        }catch(e){
+            console.log(e);
+        } 
     }
 
     valida(){
