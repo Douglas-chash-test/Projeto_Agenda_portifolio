@@ -1,4 +1,4 @@
-const cadastroUserBD = require('../models/LoginModel');
+const {cadastroUserBD,authenticateUserBD} = require('../models/LoginModel');
 
 exports.login = (req , res) => {
     res.render('login');
@@ -21,4 +21,15 @@ exports.registro = async (req , res) => {
         return;
     }
     res.redirect('/login');
+}
+
+exports.authenticate = async (req , res) => {
+    const user = new authenticateUserBD(req.body);
+    await user.logando();
+    if(user.errors.length > 0){
+        req.flash('errors', user.errors);
+        req.session.save(() => res.redirect('back'));
+        return;
+    }
+    res.redirect('/home');
 }
