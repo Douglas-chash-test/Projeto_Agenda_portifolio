@@ -66,11 +66,9 @@ class authenticateUserBD{
     }
 
     async logando(){
-        try{
-            await this.validaUser();
-        }catch(e){
-            this.errors.push('houve um erro inesperado, tente novamente mais tarde');
-        }
+        
+        await this.validaUser();
+        
 
         if(this.errors.length === 0){
             this.validaSenha();
