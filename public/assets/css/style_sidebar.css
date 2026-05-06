@@ -1,0 +1,101 @@
+body {
+    background-color: #1C1C1C;
+    color: #ffffff;
+    font-family: 'Segoe UI', sans-serif;
+    margin: 0;
+    display: flex;
+    height: 100vh;
+    overflow: hidden;
+}
+
+/* Sidebar Estilo Base */
+.sidebar {
+    width: 260px;
+    background-color: #262626;
+    display: flex;
+    flex-direction: column;
+    border-right: 1px solid #4F4F4F;
+    transition: width 0.3s ease; /* Transição suave ao retrair */
+    overflow: hidden;
+}
+
+/* Quando a sidebar estiver retraída */
+.sidebar.collapsed {
+    width: 70px;
+}
+
+.sidebar-header {
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    border-bottom: 1px solid #4F4F4F;
+    height: 60px;
+}
+
+/* Botão de Toggle */
+.toggle-btn {
+    background: none;
+    border: none;
+    color: #FFD700;
+    font-size: 20px;
+    cursor: pointer;
+    padding: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.menu-text {
+    white-space: nowrap;
+    transition: opacity 0.2s ease;
+}
+
+/* Esconde o texto quando retraído */
+.sidebar.collapsed .menu-text {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.nav-links {
+    list-style: none;
+    padding: 0;
+    margin: 10px 0;
+    flex-grow: 1;
+}
+
+.nav-links a {
+    display: flex;
+    align-items: center;
+    padding: 15px 24px; /* Padding ajustado para centralizar o ícone quando retraído */
+    color: #ffffff;
+    text-decoration: none;
+    gap: 20px;
+    height: 50px;
+}
+
+.nav-links i {
+    min-width: 22px;
+    font-size: 18px;
+    color: #FFD700;
+    text-align: center;
+}
+
+.nav-links a:hover {
+    background-color: #4F4F4F;
+}
+
+.logout-item {
+    margin-top: auto;
+    border-top: 1px solid #4F4F4F;
+}
+
+.content {
+    flex-grow: 1;
+    padding: 40px;
+    transition: margin-left 0.3s ease;
+}
+
+span {
+    color: #FFD700;
+}

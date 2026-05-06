@@ -31,5 +31,6 @@ exports.authenticate = async (req , res) => {
         req.session.save(() => res.redirect('back'));
         return;
     }
-    res.redirect('/home');
+    req.session.user = { username: user.user.username , email: user.user.email};
+    req.session.save(() => res.render('Home'));
 }
