@@ -60,28 +60,37 @@
             </div>
 
             <div class="items-grid">
-                <!-- Exemplo de card de tarefa -->
-                <div class="display-card task-card" onclick="selectTask(this)">
-                    <div class="task-content">
-                        <div class="card-icon"><i class="fas fa-clipboard-list"></i></div>
-                        <div class="card-info">
-                            <strong>Revisar Projeto</strong>
-                            <p>Crie suas tarefas e compromisso e adicione prazo.</p>
-                            <span>Prazo: 15/05/2026</span>
-                        </div>
-                    </div>
+                <% if (typeof tarefas !== 'undefined' && tarefas.length > 0) { %>
+                    <% tarefas.forEach(tarefa => { %>
+                        <div class="display-card task-card" onclick="selectTask(this)">
+                            <div class="task-content">
+                                <div class="card-icon"><i class="fas fa-clipboard-list"></i></div>
+                                <div class="card-info">
+                                    <strong><%= tarefa.titulo %></strong>
+                                    <p><%= tarefa.descricao %></p>
+                                    <span>Prazo: <%= tarefa.data_atividade.toLocaleDateString('pt-BR') %></span>
+                                </div>
+                            </div>
 
-                    <div class="task-actions">
-                        <button type="button" class="task-btn done" onclick="markTaskAsDone(event, this)">
-                            <i class="fas fa-check"></i>
-                            Feito
-                        </button>
-                        <button type="button" class="task-btn delete" onclick="deleteTask(event, this)">
-                            <i class="fas fa-trash"></i>
-                            Excluir
-                        </button>
+                            <div class="task-actions">
+                                <button type="button" class="task-btn done" onclick="markTaskAsDone(event, this)">
+                                    <i class="fas fa-check"></i>
+                                    Feito
+                                </button>
+                                <button type="button" class="task-btn delete" onclick="deleteTask(event, this)">
+                                    <i class="fas fa-trash"></i>
+                                    Excluir
+                                </button>
+                            </div>
+                        </div>
+                    <% }) %>
+                <% } else { %>
+                    <div class="empty-state">
+                        <div class="card-icon"><i class="fas fa-clipboard-list"></i></div>
+                        <strong>Nenhuma tarefa criada</strong>
+                        <p>Use o menu para criar sua primeira tarefa.</p>
                     </div>
-                </div>
+                <% } %>
             </div>
         </section>
 

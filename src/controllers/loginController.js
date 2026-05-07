@@ -1,3 +1,4 @@
+const { ids } = require('webpack');
 const {cadastroUserBD,authenticateUserBD} = require('../models/LoginModel');
 
 exports.login = (req , res) => {
@@ -31,6 +32,6 @@ exports.authenticate = async (req , res) => {
         req.session.save(() => res.redirect('back'));
         return;
     }
-    req.session.user = { username: user.user.username , email: user.user.email};
-    req.session.save(() => res.render('Home'));
+    req.session.user = { username: user.user.username , email: user.user.email , id: user.user._id};
+    req.session.save(() => res.redirect('/Home'));
 }
