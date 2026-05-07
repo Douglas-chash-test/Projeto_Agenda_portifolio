@@ -3,8 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard</title>
+    <title>Sistema de Gestão - Dashboard</title>
+    <!-- CSS Separado -->
     <link rel="stylesheet" href="../assets/css/style_sidebar.css">
+    <!-- Ícones -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
@@ -19,19 +21,31 @@
 
         <ul class="nav-links">
             <li>
-                <a href="#">
+                <a href="javascript:void(0)" class="nav-tab active" onclick="showSection('tasks-section', this)">
+                    <i class="fas fa-home"></i>
+                    <span class="menu-text">Tarefas</span>
+                </a>
+            </li>
+            <li>
+                <a href="javascript:void(0)" class="nav-tab" onclick="showSection('contacts-section', this)">
+                    <i class="fas fa-address-book"></i>
+                    <span class="menu-text">Contatos</span>
+                </a>
+            </li>
+            <li>
+                <a href="javascript:void(0)" onclick="openModal('modal-contato')">
                     <i class="fas fa-user-plus"></i>
                     <span class="menu-text">Criar Contato</span>
                 </a>
             </li>
             <li>
-                <a href="#">
+                <a href="javascript:void(0)" onclick="openModal('modal-tarefa')">
                     <i class="fas fa-tasks"></i>
                     <span class="menu-text">Criar Tarefa</span>
                 </a>
             </li>
             <li class="logout-item">
-                <a href="../">
+                <a href="/">
                     <i class="fas fa-sign-out-alt"></i>
                     <span class="menu-text">Sair</span>
                 </a>
@@ -40,15 +54,104 @@
     </nav>
 
     <main class="content">
-        <h1>Bem-vindo <span><%= user.username %></span></h1>
-        <p>Fique a vontade para criar tarefas e adcionar contatos em sua agenda.</p>
+        <section id="tasks-section" class="content-section active">
+            <div class="section-title">
+                <h2>Tarefas</h2>
+            </div>
+
+            <div class="items-grid">
+                <!-- Exemplo de card de tarefa -->
+                <div class="display-card task-card" onclick="selectTask(this)">
+                    <div class="task-content">
+                        <div class="card-icon"><i class="fas fa-clipboard-list"></i></div>
+                        <div class="card-info">
+                            <strong>Revisar Projeto</strong>
+                            <p>Crie suas tarefas e compromisso e adicione prazo.</p>
+                            <span>Prazo: 15/05/2026</span>
+                        </div>
+                    </div>
+
+                    <div class="task-actions">
+                        <button type="button" class="task-btn done" onclick="markTaskAsDone(event, this)">
+                            <i class="fas fa-check"></i>
+                            Feito
+                        </button>
+                        <button type="button" class="task-btn delete" onclick="deleteTask(event, this)">
+                            <i class="fas fa-trash"></i>
+                            Excluir
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contacts-section" class="content-section">
+            <div class="section-title">
+                <h2>Contatos</h2>
+            </div>
+
+            <div class="contacts-list">
+                <div class="contact-item">
+                    <div class="card-icon"><i class="fas fa-user"></i></div>
+                    <div class="card-info">
+                        <strong>João Silva</strong>
+                        <p>(11) 98888-7777</p>
+                    </div>
+                    <button type="button" class="contact-delete" onclick="deleteContact(this)">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                </div>
+            </div>
+        </section>
     </main>
 
-    <script>
-        function toggleSidebar() {
-            const sidebar = document.getElementById('sidebar');
-            sidebar.classList.toggle('collapsed');
-        }
-    </script>
+    <div id="overlay" class="overlay" onclick="closeAllModals()"></div>
+
+    <!-- Modal Contato -->
+    <div id="modal-contato" class="floating-card">
+        <div class="card-header">
+            <h2>Novo Contato</h2>
+            <button class="close-btn" onclick="closeAllModals()">&times;</button>
+        </div>
+        <form action="/contatos/create" method="POST">
+            <input type="hidden" name="_csrf" value="<%= typeof csrfToken !== 'undefined' ? csrfToken : '' %>">
+            <div class="input-group">
+                <label>Nome Completo</label>
+                <input type="text" name="nome" placeholder="Ex: Maria Souza" required>
+            </div>
+            <div class="input-group">
+                <label>Telefone</label>
+                <input type="text" name="telefone" placeholder="(00) 00000-0000">
+            </div>
+            <button type="submit" class="btn-primary">Salvar Contato</button>
+        </form>
+    </div>
+
+    <!-- Modal Tarefa -->
+    <div id="modal-tarefa" class="floating-card">
+        <div class="card-header">
+            <h2>Nova Tarefa</h2>
+            <button class="close-btn" onclick="closeAllModals()">&times;</button>
+        </div>
+        <form action="/tarefas/create" method="POST">
+            <input type="hidden" name="_csrf" value="<%= typeof csrfToken !== 'undefined' ? csrfToken : '' %>">
+            <div class="input-group">
+                <label>Título</label>
+                <input type="text" name="titulo" placeholder="O que precisa ser feito?" required>
+            </div>
+            <div class="input-group">
+                <label>Descrição</label>
+                <textarea name="descricao" rows="4" placeholder="Detalhes adicionais..."></textarea>
+            </div>
+            <div class="input-group">
+                <label>Data da atividade</label>
+                <input type="date" name="data_atividade" required>
+            </div>
+            <button type="submit" class="btn-primary">Criar Tarefa</button>
+        </form>
+    </div>
+
+    <!-- JavaScript Separado -->
+    <script src="../assets/js/home.js"></script>
 </body>
 </html>
