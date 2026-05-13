@@ -100,17 +100,27 @@
             </div>
 
             <div class="contacts-list">
-                <div class="contact-item">
-                    <div class="card-icon"><i class="fas fa-user"></i></div>
-                    <div class="card-info">
-                        <strong>João Silva</strong>
-                        <p>(11) 98888-7777</p>
+                <% if (typeof contatos !== 'undefined' && contatos.length > 0) { %>
+                    <% contatos.forEach(contato => { %>
+                        <div class="contact-item">
+                            <div class="card-icon"><i class="fas fa-user"></i></div>
+                            <div class="card-info">
+                                <span><%contato.errors%></span>
+                                <strong><%= contato.nome_contato %></strong>
+                                <p><%= contato.telefone %></p>
+                            </div>
+                            <button type="button" class="contact-delete" onclick="deleteContact(this)">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
+                    <% }) %>
+                <% } else { %>
+                    <div class="empty-state">
+                        <div class="card-icon"><i class="fas fa-user"></i></div>
+                        <strong>Nenhum contato criado</strong>
+                        <p>Use o menu para criar seu primeiro contato.</p>
                     </div>
-                    <button type="button" class="contact-delete" onclick="deleteContact(this)">
-                        <i class="fas fa-trash"></i>
-                    </button>
-                </div>
-            </div>
+                <% } %>
         </section>
     </main>
 
@@ -126,7 +136,7 @@
             <input type="hidden" name="_csrf" value="<%= typeof csrfToken !== 'undefined' ? csrfToken : '' %>">
             <div class="input-group">
                 <label>Nome Completo</label>
-                <input type="text" name="nome" placeholder="Ex: Maria Souza" required>
+                <input type="text" name="nome_contato" placeholder="Ex: Maria Souza" required>
             </div>
             <div class="input-group">
                 <label>Telefone</label>
